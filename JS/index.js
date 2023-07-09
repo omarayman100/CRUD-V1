@@ -18,7 +18,7 @@ function getAddUser() {
   } else if (getInputQuantity.value == "") {
     alert("Please Enter Product Quantity");
   } else if (getInputId.value == "") {
-    alert("Please Enter Product ID/Description");
+    alert("Please Enter Product ID");
   } else {
     user = {
       name: getInputName.value,
