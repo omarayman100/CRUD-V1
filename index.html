@@ -10,67 +10,43 @@
     <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
-    <div class="container  py-5">
-        <h1 class="pb-5 text-center">Store management system</h1>
-
-        <div class="form-group">
-            <label for="product-name-input ">Product name</label>
-            <input class="form-control  my-3" type="text" id="product-name-input" name="product-name">
-
-        </div>
-        <div class="form-group">
-            <label for="#product-price-input ">Product price</label>
-            <input class="form-control  my-3" type="number" id="product-price-input" name="product-price">
-
-        </div>
-        <div class="form-group">
-            <label for="product-category-input ">Product category</label>
-            <input class="form-control  my-3" type="text" id="product-category-input" name="product-category">
-
-        </div>
-        <div class="form-group">
-            <label for="product-description-input ">Product description</label>
-            <input class="form-control  my-3" type="text" id="product-description-input" name="product-description">
-
-        </div>
-
-        <button onclick="addProduct()" id="addproduct" class="btn btn-outline-primary py-2 px-4">Add Product</button>
-
-        <input type="search" placeholder="Search" oninput="findproduct(this.value)" class="form-control w-50 m-auto my-3">
-        <br>
-        <hr>
-
-        <table class="w-100">
-            
-            <thead class="table">
-                <th>
-                    index
-                </th>
-
-                <th>
-                    Product Name
-                </th> 
-                <th>
-                    Product price
-                </th>
-                <th>
-                    Product category
-                </th>
-                <th>
-                    Product description
-                </th>
-                <th>
-                    Update 
-                </th>
-                <th>
-                    Delete 
-                </th>
-
-            </thead>
-            <tbody id="table-body"></tbody>
+    <div class="container mt-5 text-center">
+      <input
+        id="inPutName"
+        placeholder="Inter Your Name"
+        class="form-control my-4"
+        type="text"
+      />
+      <input
+        id="inPutBalance"
+        placeholder="Inter Your Balance"
+        class="form-control"
+        type="number"
+      />
+      <input
+        id="inPutId"
+        placeholder="Inter Your ID"
+        class="form-control my-4"
+        type="number"
+      />
+      <button onclick="getAddUser()" id="btnAdd" class="btn btn-danger px-3">
+        ADD
+      </button>
+      <div class="mt-5">
+        <table class="table table-striped table-sm table-bordered">
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Name</th>
+              <th>Balance</th>
+              <th>ID</th>
+              <th class="w-25">Action</th>
+            </tr>
+          </thead>
+          <tbody id="displayUsers"></tbody>
         </table>
+      </div>
     </div>
-
     <script src="JS/bootstrap.bundle.min.js"></script>
     <script src="JS/index.js"></script>
 </body>
