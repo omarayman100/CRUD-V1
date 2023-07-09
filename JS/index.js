@@ -1,7 +1,7 @@
 
 let getAddBtnId = document.getElementById("#btnAdd");
 let getInputName = document.getElementById("inPutName");
-let getInputBalance = document.getElementById("inPutBalance");
+let getInputQuantity = document.getElementById("inPutBalance");
 let getInputId = document.getElementById("inPutId");
 
 allUsers = [];
@@ -14,15 +14,15 @@ if (localStorage.getItem("AllUsers") != null) {
 getDisplayUser();
 function getAddUser() {
   if (getInputName.value == "") {
-    alert("Plz Inter A Name ??");
-  } else if (getInputBalance.value == "") {
-    alert("Plz Inter  Balance Number ??");
+    alert("Please Enter Product Name");
+  } else if (getInputQuantity.value == "") {
+    alert("Please Enter Product Quantity");
   } else if (getInputId.value == "") {
-    alert("Plz Inter  ID Number ??");
+    alert("Please Enter Product ID/Description");
   } else {
     user = {
       name: getInputName.value,
-      balance: getInputBalance.value,
+      Quantity: getInputQuantity.value,
       id: getInputId.value,
     };
     allUsers.push(user);
@@ -42,7 +42,7 @@ function getDisplayUser() {
                 ${allUsers[i].name}
               </td>
               <td>
-                ${allUsers[i].balance}
+                ${allUsers[i].Quantity}
               </td>
               <td>
                 ${allUsers[i].id}
@@ -63,16 +63,16 @@ function getDeleteUser(i) {
 }
 function getUpDate(i) {
   let newName = prompt("Enter Ur New Name");
-  let newBalance = prompt("Enter Ur New Balance");
+  let newQuantity = prompt("Enter Ur New Quantity");
   let newId = prompt("Enter Ur New ID");
   allUsers[i].name = newName;
-  allUsers[i].balance = newBalance;
+  allUsers[i].Quantity = newQuantity;
   allUsers[i].id = newId;
   localStorage.setItem("AllUsers",JSON.stringify(allUsers));
   getDisplayUser();
 }
 function clearForm() {
   getInputName.value = "";
-  getInputBalance.value = "";
+  getInputQuantity.value = "";
   getInputId.value = "";
 }
