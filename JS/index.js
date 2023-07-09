@@ -1,99 +1,78 @@
-var products = [];
-var serchproduct = [];
-var mainIndex;
-var product = {};
 
-if (localStorage.getItem("products") != null) {
-  products = JSON.parse(localStorage.getItem("products"));
-  displayproduct(products);
+let getAddBtnId = document.getElementById("#btnAdd");
+let getInputName = document.getElementById("inPutName");
+let getInputBalance = document.getElementById("inPutBalance");
+let getInputId = document.getElementById("inPutId");
+
+allUsers = [];
+if (localStorage.getItem("AllUsers") != null) {
+  
+  allUsers = JSON.parse(localStorage.getItem("AllUsers"));
 } else {
-  products = [];
+  allUsers = []
 }
-
-function addProduct() {
-  product = {
-    productName: document.getElementById("product-name-input").value,
-    productprice: document.getElementById("product-price-input").value,
-    productcategory: document.getElementById("product-category-input").value,
-    productdescription: document.getElementById("product-description-input")
-      .value,
-    id: Date.now(),
-  };
-  if (addproduct.innerHTML == "Add Product") {
-    products.push(product);
+getDisplayUser();
+function getAddUser() {
+  if (getInputName.value == "") {
+    alert("Plz Inter A Name ??");
+  } else if (getInputBalance.value == "") {
+    alert("Plz Inter  Balance Number ??");
+  } else if (getInputId.value == "") {
+    alert("Plz Inter  ID Number ??");
   } else {
-    // console.log(mainIndex);
-    products.splice(mainIndex, 1, product);
-    document.getElementById("addproduct").innerHTML = "Add Product";
+    user = {
+      name: getInputName.value,
+      balance: getInputBalance.value,
+      id: getInputId.value,
+    };
+    allUsers.push(user);
+    localStorage.setItem("AllUsers", JSON.stringify(allUsers));
+    getDisplayUser();
+    clearForm();
   }
-  // console.log(product.id);
-  displayproduct(products);
-  cleardata();
+}
+function getDisplayUser() {
+  cartona = "";
+  for (i = 0; i < allUsers.length; i++) {
+    cartona += `<tr>
+              <td>
+                ${i + 1}
+              </td>
+              <td>
+                ${allUsers[i].name}
+              </td>
+              <td>
+                ${allUsers[i].balance}
+              </td>
+              <td>
+                ${allUsers[i].id}
+              </td>
+              <td class="text-center">
+                <button onclick="getUpDate(${i})"   class="btn btn-primary px-3 me-3">Edit</button>
+                <button onclick="getDeleteUser(${i})" class="btn btn-warning px-2">Delete</button>
+              </td>
+            </tr>`;
+  }
+  document.getElementById("displayUsers").innerHTML = cartona;
 }
 
-function displayproduct(array) {
-  var productCiontainer = "";
-
-  for (var i = 0; i < array.length; i++) {
-    productCiontainer += `<tr>
-    <td>${i}</td>
-    <td>${array[i].productName}</td>
-    <td>${array[i].productprice}</td>
-    <td>${array[i].productcategory}</td>
-    <td>${array[i].productdescription}</td>
-    <td><button onclick="updateproduct(${array[i].id})" class="btn btn-outline-warning">update</button></td>
-    <td><button onclick="deleteproduct(${array[i].id})" class="btn btn-outline-danger">delete</button></td>
-    </tr>`;
-  }
-  document.getElementById("table-body").innerHTML = productCiontainer;
-  localStorage.setItem("products", JSON.stringify(products));
+function getDeleteUser(i) {
+  allUsers.splice(i, 1);
+    localStorage.setItem("AllUsers", JSON.stringify(allUsers));
+  getDisplayUser();
 }
-
-function deleteproduct(id) {
-  for (var i = 0; i < products.length; i++) {
-    if (products[i].id == id) {
-      products.splice(i, 1);
-    }
-  }
-  displayproduct(products);
+function getUpDate(i) {
+  let newName = prompt("Enter Ur New Name");
+  let newBalance = prompt("Enter Ur New Balance");
+  let newId = prompt("Enter Ur New ID");
+  allUsers[i].name = newName;
+  allUsers[i].balance = newBalance;
+  allUsers[i].id = newId;
+  localStorage.setItem("AllUsers",JSON.stringify(allUsers));
+  getDisplayUser();
 }
-
-function updateproduct(id) {
-  document.getElementById("addproduct").innerHTML = "Update Product";
-
-  for (var i = 0; i < products.length; i++) {
-    if (products[i].id == id) {
-      mainIndex = i;
-    }
-  }
-
-  document.getElementById("product-name-input").value =
-    products[mainIndex].productName;
-  document.getElementById("product-price-input").value =
-    products[mainIndex].productprice;
-  document.getElementById("product-category-input").value =
-    products[mainIndex].productcategory;
-  document.getElementById("product-description-input").value =
-    products[mainIndex].productdescription;
-}
-
-function cleardata() {
-  document.getElementById("product-name-input").value = "";
-  document.getElementById("product-price-input").value = "";
-  document.getElementById("product-category-input").value = "";
-  document.getElementById("product-description-input").value = "";
-}
-
-function findproduct(term) {
-  serchproduct = [];
-  for (var i = 0; i < products.length; i++) {
-    if (
-      products[i].productName.toLowerCase().includes(term.toLowerCase()) == true
-    ) {
-      serchproduct.push(products[i]);
-      // console.log(serchproduct);
-    }
-  }
-
-  displayproduct(serchproduct);
+function clearForm() {
+  getInputName.value = "";
+  getInputBalance.value = "";
+  getInputId.value = "";
 }
